@@ -1,0 +1,19 @@
+{
+  "name": "mediscan-backend",
+  "version": "1.0.0",
+  "description": "MediScan AI Backend API with SQL Caching & OCR Processing",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "sql.js": "^1.12.0",
+    "tesseract.js": "^5.1.1"
+  }
+}
