@@ -32,7 +32,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
   console.log(`=======================================================`);
   console.log(` MediScan AI Server Running on http://localhost:${PORT}`);
   console.log(` Database: SQL Caching Enabled`);
