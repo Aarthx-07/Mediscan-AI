@@ -3,9 +3,7 @@
  * Configured with environment variable VITE_API_URL for production deployment
  */
 
-const API_BASE = (import.meta.env && import.meta.env.VITE_API_URL) 
-  ? import.meta.env.VITE_API_URL.replace(/\/$/, '')
-  : '';
+const API_BASE = 'https://mediscan-ai-ilha.onrender.com';
 
 export async function apiFetch(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
