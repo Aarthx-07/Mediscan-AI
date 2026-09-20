@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Upload, Camera, FileText, CheckCircle2, AlertCircle, RefreshCw, Layers } from 'lucide-react';
+import { Upload, Camera, FileText, AlertCircle, RefreshCw } from 'lucide-react';
 import { TRANSLATIONS } from '../i18n/translations';
+import { apiFetch } from '../utils/api';
 
 export default function Scanner({ onScanComplete, lang }) {
   const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
@@ -8,22 +9,21 @@ export default function Scanner({ onScanComplete, lang }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisStep, setAnalysisStep] = useState(1); // 1: OCR, 2: SQL Check, 3: Done
+  const [analysisStep, setAnalysisStep] = useState(1);
   const [errorMsg, setErrorMsg] = useState(null);
   const fileInputRef = useRef(null);
 
   const sampleMedicines = [
-    { name: 'Paracetamol 500mg', sampleName: 'Paracetamol', sampleExpiry: { status: 'valid', date_text: '08/2027' }, badge: 'Valid Expiry 08/2027' },
-    { name: 'Cetirizine 10mg', sampleName: 'Cetirizine', sampleExpiry: { status: 'valid', date_text: '12/2026' }, badge: 'Valid Expiry 12/2026' },
-    { name: 'Amoxicillin 500mg', sampleName: 'Amoxicillin', sampleExpiry: { status: 'expired', date_text: '05/2025', warning: 'This medicine appears to be expired. Do not use it without consulting a qualified healthcare professional.' }, badge: '⚠️ Expired 05/2025' },
-    { name: 'Dolo 650mg', sampleName: 'Dolo 650', sampleExpiry: { status: 'valid', date_text: '04/2027' }, badge: 'Valid Expiry 04/2027' },
-    { name: 'Ibuprofen 400mg', sampleName: 'Ibuprofen', sampleExpiry: { status: 'valid', date_text: '10/2028' }, badge: 'Valid Expiry 10/2028' }
+    { name: 'Paracetamol 500mg', sampleName: 'Paracetamol', sampleExpiry: { status: 'valid', date_text: '08/2027' } },
+    { name: 'Cetirizine 10mg', sampleName: 'Cetirizine', sampleExpiry: { status: 'valid', date_text: '12/2026' } },
+    { name: 'Amoxicillin 500mg', sampleName: 'Amoxicillin', sampleExpiry: { status: 'expired', date_text: '05/2025' } },
+    { name: 'Ibuprofen 400mg', sampleName: 'Ibuprofen', sampleExpiry: { status: 'valid', date_text: '10/2028' } }
   ];
 
   const handleFileSelect = (file) => {
     if (!file) return;
     if (!file.type.match(/^image\/(jpeg|jpg|png|webp|bmp)$/i)) {
-      setErrorMsg('Please upload a valid image file (JPG, PNG, WEBP).');
+      setErrorMsg(t.error_image_invalid);
       return;
     }
     setErrorMsg(null);
@@ -40,61 +40,76 @@ export default function Scanner({ onScanComplete, lang }) {
 
   const triggerUpload = async (fileObj, sampleObj = null) => {
     setIsAnalyzing(true);
-    setAnalysisStep(1); // OCR Extraction
+    setAnalysisStep(1);
     setErrorMsg(null);
 
     const formData = new FormData();
     if (fileObj) {
       formData.append('image', fileObj);
-    } else if (sampleObj) {
-      formData.append('sampleName', sampleObj.sampleName);
-      formData.append('sampleText', `${sampleObj.sampleName} EXP ${sampleObj.sampleExpiry.date_text}`);
     }
 
-    // Step 1: Simulate OCR Extraction delay
-    setTimeout(async () => {
-      setAnalysisStep(2); // SQL Cache Lookup
-
+    try {
+      setAnalysisStep(1);
+      
       setTimeout(async () => {
+        setAnalysisStep(2);
         try {
-          const res = await fetch('/api/scan', {
-            method: 'POST',
-            body: fileObj ? formData : JSON.stringify({
-              sampleName: sampleObj.sampleName,
-              sampleExpiry: sampleObj.sampleExpiry,
-              sampleText: `${sampleObj.sampleName} EXP ${sampleObj.sampleExpiry.date_text}`
-            }),
-            headers: fileObj ? {} : { 'Content-Type': 'application/json' }
-          });
+          let json;
+          if (fileObj) {
+            json = await apiFetch('/api/scan', {
+              method: 'POST',
+              body: formData
+            });
+          } else {
+            json = await apiFetch('/api/scan', {
+              method: 'POST',
+              body: JSON.stringify({
+                sampleName: sampleObj.sampleName,
+                sampleExpiry: sampleObj.sampleExpiry,
+                sampleText: `${sampleObj.sampleName} EXP ${sampleObj.sampleExpiry.date_text}`
+              })
+            });
+          }
 
-          const json = await res.json();
           setIsAnalyzing(false);
 
-          if (json.success) {
+          if (json && json.success) {
             onScanComplete(json);
           } else {
-            setErrorMsg(json.error || 'Failed to identify medicine image.');
+            setErrorMsg(json?.error || t.error_not_found);
           }
         } catch (err) {
           setIsAnalyzing(false);
-          setErrorMsg('Network error. Could not connect to backend server.');
+          setErrorMsg(t.error_network);
         }
       }, 700);
-    }, 800);
+    } catch (err) {
+      setIsAnalyzing(false);
+      setErrorMsg(t.error_network);
+    }
   };
 
   return (
     <div className="container">
       <div className="scanner-card">
-        <h2 style={{ textAlign: 'center', marginBottom: '0.5rem', fontSize: '1.8rem' }}>{t.scan_title}</h2>
-        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '2rem' }}>
-          Upload a photo of your medicine strip, box, bottle, or barcode to extract information and verify safety.
+        <h2 style={{ textAlign: 'center', marginBottom: '0.4rem', fontSize: '1.6rem' }}>{t.scan_title}</h2>
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '1.75rem', fontSize: '0.95rem' }}>
+          {t.scan_subtitle}
         </p>
 
         {errorMsg && (
-          <div style={{ background: 'var(--danger-red-bg)', color: 'var(--danger-red)', padding: '1rem', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <AlertCircle size={20} />
-            <span>{errorMsg}</span>
+          <div style={{ background: 'var(--danger-red-bg)', color: 'var(--danger-red)', padding: '0.9rem 1rem', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', fontSize: '0.9rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <AlertCircle size={18} />
+              <span>{errorMsg}</span>
+            </div>
+            <button 
+              className="btn-secondary" 
+              onClick={() => { setErrorMsg(null); if (selectedFile) triggerUpload(selectedFile); }}
+              style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem' }}
+            >
+              {t.btn_retry}
+            </button>
           </div>
         )}
 
@@ -119,45 +134,45 @@ export default function Scanner({ onScanComplete, lang }) {
                 <div>
                   <img 
                     src={previewUrl} 
-                    alt="Uploaded Medicine Preview" 
-                    style={{ maxHeight: '220px', borderRadius: 'var(--radius-sm)', marginBottom: '1rem', objectFit: 'contain' }} 
+                    alt={t.selected_image} 
+                    style={{ maxHeight: '200px', borderRadius: 'var(--radius-sm)', marginBottom: '0.85rem', objectFit: 'contain' }} 
                   />
-                  <p style={{ fontWeight: 600, color: 'var(--teal-dark)' }}>{selectedFile?.name || 'Selected Medicine Image'}</p>
+                  <p style={{ fontWeight: 600, color: 'var(--teal-dark)' }}>{selectedFile?.name || t.selected_image}</p>
                 </div>
               ) : (
                 <div>
-                  <Upload size={48} className="dropzone-icon" />
-                  <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>{t.scan_drop}</p>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{t.scan_or}</p>
-                  <span style={{ display: 'inline-block', marginTop: '1rem', padding: '0.4rem 1rem', background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 600 }}>
-                    Supports JPG, PNG, WEBP (Up to 10MB)
+                  <Upload size={40} className="dropzone-icon" />
+                  <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.3rem' }}>{t.scan_drop}</p>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{t.scan_or}</p>
+                  <span style={{ display: 'inline-block', marginTop: '0.85rem', padding: '0.3rem 0.85rem', background: '#ffffff', border: '1px solid var(--border-color)', borderRadius: '50px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    {t.scan_supports}
                   </span>
                 </div>
               )}
             </div>
 
             {previewUrl && (
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', marginTop: '1.25rem' }}>
                 <button 
                   className="btn-primary"
                   onClick={() => triggerUpload(selectedFile)}
                 >
-                  <Camera size={18} />
-                  Analyze Uploaded Image
+                  <Camera size={16} />
+                  {t.btn_analyze}
                 </button>
                 <button 
                   className="btn-secondary"
                   onClick={() => { setSelectedFile(null); setPreviewUrl(null); }}
                 >
-                  <RefreshCw size={18} />
-                  Change Image
+                  <RefreshCw size={16} />
+                  {t.btn_change_image}
                 </button>
               </div>
             )}
 
-            {/* Instant Demonstration Samples */}
+            {/* Demonstration Samples */}
             <div className="sample-selector-box">
-              <p style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
+              <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)' }}>
                 {t.scan_sample_title}
               </p>
               <div className="sample-buttons">
@@ -167,10 +182,10 @@ export default function Scanner({ onScanComplete, lang }) {
                     className="sample-btn"
                     onClick={() => triggerUpload(null, sample)}
                   >
-                    <FileText size={16} style={{ color: 'var(--teal)' }} />
+                    <FileText size={14} style={{ color: 'var(--teal)' }} />
                     <span>{sample.name}</span>
-                    <span style={{ fontSize: '0.75rem', opacity: 0.8, color: sample.sampleExpiry.status === 'expired' ? 'var(--danger-red)' : 'var(--teal-dark)' }}>
-                      ({sample.badge})
+                    <span style={{ fontSize: '0.75rem', opacity: 0.85, color: sample.sampleExpiry.status === 'expired' ? 'var(--danger-red)' : 'var(--teal-dark)' }}>
+                      ({sample.sampleExpiry.status === 'expired' ? `${t.status_expired} ${sample.sampleExpiry.date_text}` : `${t.status_valid} ${sample.sampleExpiry.date_text}`})
                     </span>
                   </button>
                 ))}
@@ -178,25 +193,13 @@ export default function Scanner({ onScanComplete, lang }) {
             </div>
           </div>
         ) : (
-          /* Processing Loader View */
+          /* Processing Loading View */
           <div className="processing-box">
-            <div className="radar-spinner"></div>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{t.analyzing}</h3>
-            <p style={{ color: 'var(--text-muted)' }}>
-              {analysisStep === 1 ? t.identifying : t.checking_cache}
+            <div className="simple-spinner"></div>
+            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.4rem' }}>{t.loading_analyzing}</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              {analysisStep === 1 ? t.loading_step_ocr : t.loading_step_verify}
             </p>
-
-            <div className="step-tracker">
-              <div className={`step-item ${analysisStep >= 1 ? 'active' : ''}`}>
-                <CheckCircle2 size={18} /> 1. OCR Extraction
-              </div>
-              <div className={`step-item ${analysisStep >= 2 ? 'active' : ''}`}>
-                <Layers size={18} /> 2. SQL Cache Lookup
-              </div>
-              <div className="step-item">
-                <FileText size={18} /> 3. Verification
-              </div>
-            </div>
           </div>
         )}
       </div>

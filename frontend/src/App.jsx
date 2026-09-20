@@ -6,7 +6,6 @@ import Scanner from './components/Scanner';
 import SearchBox from './components/SearchBox';
 import MedicineDetail from './components/MedicineDetail';
 import RecentScans from './components/RecentScans';
-import AdminDashboard from './components/AdminDashboard';
 import SafetyDisclaimerModal from './components/SafetyDisclaimerModal';
 
 export default function App() {
@@ -21,26 +20,24 @@ export default function App() {
     }
   });
 
-  // Settings State
-  const [lang, setLang] = useState('en');
-  const [fontSize, setFontSize] = useState('md');
-  const [highContrast, setHighContrast] = useState(false);
-  const [theme, setTheme] = useState('light');
+  // Language State - Single source of truth with localStorage persistence
+  const [lang, setLang] = useState(() => {
+    try {
+      const savedLang = localStorage.getItem('mediscan_lang');
+      return savedLang || 'en';
+    } catch (e) {
+      return 'en';
+    }
+  });
+
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
 
-  // Apply Font Scaling & Theme Classes to Body
+  // Persist language selection
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-    
-    if (highContrast) {
-      document.body.classList.add('high-contrast');
-    } else {
-      document.body.classList.remove('high-contrast');
-    }
-
-    const fontMap = { sm: '14px', md: '16px', lg: '18px' };
-    document.documentElement.style.fontSize = fontMap[fontSize] || '16px';
-  }, [theme, highContrast, fontSize]);
+    try {
+      localStorage.setItem('mediscan_lang', lang);
+    } catch (e) {}
+  }, [lang]);
 
   // Handle Scan or Search Completion
   const handleResultReceived = (resultObj) => {
@@ -78,15 +75,9 @@ export default function App() {
         }}
         lang={lang}
         setLang={setLang}
-        fontSize={fontSize}
-        setFontSize={setFontSize}
-        highContrast={highContrast}
-        setHighContrast={setHighContrast}
-        theme={theme}
-        setTheme={setTheme}
       />
 
-      <main style={{ flex: 1, paddingBottom: '3rem' }}>
+      <main style={{ flex: 1, paddingBottom: '2.5rem' }}>
         {currentTab === 'home' && (
           <>
             <Hero setCurrentTab={setCurrentTab} lang={lang} />
@@ -122,10 +113,6 @@ export default function App() {
             onClearHistory={handleClearHistory}
             lang={lang}
           />
-        )}
-
-        {currentTab === 'admin' && (
-          <AdminDashboard lang={lang} />
         )}
       </main>
 

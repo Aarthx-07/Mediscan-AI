@@ -14,46 +14,44 @@ export default function SafetyDisclaimerModal({ isOpen, onClose, lang }) {
       left: 0,
       right: 0,
       bottom: 0,
-      background: 'rgba(9, 13, 22, 0.75)',
-      backdropFilter: 'blur(6px)',
+      background: 'rgba(15, 23, 42, 0.6)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1000,
-      padding: '1.5rem'
+      padding: '1.25rem'
     }}>
       <div style={{
-        background: 'var(--bg-card)',
+        background: '#ffffff',
         border: '1px solid var(--border-color)',
         borderRadius: 'var(--radius-lg)',
-        maxWidth: '560px',
+        maxWidth: '540px',
         width: '100%',
-        padding: '2rem',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+        padding: '1.75rem',
+        boxShadow: 'var(--shadow-lg)',
         position: 'relative'
       }}>
         <button 
           onClick={onClose}
-          style={{ position: 'absolute', right: '1.25rem', top: '1.25rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+          style={{ position: 'absolute', right: '1rem', top: '1rem', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', color: 'var(--teal)' }}>
-          <ShieldAlert size={28} />
-          <h2 style={{ fontSize: '1.4rem' }}>{t.disclaimer_title}</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.85rem', color: 'var(--teal)' }}>
+          <ShieldAlert size={24} />
+          <h2 style={{ fontSize: '1.3rem' }}>{t.disclaimer_title}</h2>
         </div>
 
-        <p style={{ color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
+        <p style={{ color: 'var(--text-main)', fontSize: '0.925rem', lineHeight: '1.6', marginBottom: '1.1rem' }}>
           {t.disclaimer_body}
         </p>
 
-        <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', marginBottom: '1.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-          <p style={{ marginBottom: '0.5rem' }}><strong>Important Safety Rules:</strong></p>
-          <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-            <li>MediScan AI does NOT prescribe medications or diagnose diseases.</li>
-            <li>Always follow your prescribing doctor's or pharmacist's direct instructions.</li>
-            <li>Emergency medical symptoms must be directed to emergency healthcare services immediately.</li>
+        <div style={{ background: 'var(--bg-primary)', padding: '0.85rem 1rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', marginBottom: '1.25rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <ul style={{ paddingLeft: '1.1rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+            <li>{t.disclaimer_modal_rule1}</li>
+            <li>{t.disclaimer_modal_rule2}</li>
+            <li>{t.disclaimer_modal_rule3}</li>
           </ul>
         </div>
 
@@ -62,8 +60,8 @@ export default function SafetyDisclaimerModal({ isOpen, onClose, lang }) {
           onClick={onClose} 
           style={{ width: '100%', justifyContent: 'center' }}
         >
-          <CheckCircle size={18} />
-          I Understand & Agree
+          <CheckCircle size={16} />
+          {t.btn_agree}
         </button>
       </div>
     </div>

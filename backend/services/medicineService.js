@@ -192,8 +192,8 @@ async function getMedicineInformation(queryName, strength = '') {
     
     return {
       success: true,
-      source_type: 'SQL Cache',
-      message: 'Information retrieved from MediScan database',
+      source_type: 'Database',
+      message: '',
       data: {
         ...cachedRecord,
         normalized_key: cachedRecord.normalized_key,
@@ -206,6 +206,7 @@ async function getMedicineInformation(queryName, strength = '') {
   dbManager.recordApiFetch();
 
   let externalData = await fetchFromOpenFDA(queryName);
+  const isExternalApi = !!externalData;
 
   // Fallback to offline curated knowledge base if OpenFDA doesn't yield results
   if (!externalData) {
@@ -268,8 +269,8 @@ async function getMedicineInformation(queryName, strength = '') {
 
   return {
     success: true,
-    source_type: 'External API',
-    message: 'New medicine information fetched from external registry and saved to SQL database',
+    source_type: isExternalApi ? 'External Registry' : 'Medical Registry',
+    message: '',
     data: newRecord
   };
 }
