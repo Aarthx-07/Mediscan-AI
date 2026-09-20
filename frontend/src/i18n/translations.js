@@ -608,8 +608,8 @@ const MEDICAL_FIELD_TRANSLATIONS = {
     ta: 'வலி நிவாரணி & காய்ச்சல் குறைப்பான்',
     hi: 'दर्द निवारक और बुखार रोधी',
     te: 'నొప్పి నివారణి & జ్వరం నివారిణి',
-    ml: 'വേദന സംഹാരിയും പനി കുറയ്ക്കുന്ന മരുന്നും',
-    kn: 'ನೋವು ನಿವಾರಕ ಮತ್ತು ಜ್ವರ ನಿವಾರಕ'
+    ml: 'വേദന സംഹാരിയും പനി കുറയ്ക്കുന്ന മരുന്നும்',
+    kn: 'ನೋವು ನಿವಾರಕ மற்றும் ಜ್ವರ ನಿವಾರಕ'
   },
   'second-generation antihistamine (anti-allergy)': {
     ta: 'இரண்டாம் தலைமுறை ஆன்டிஹிஸ்டமைன் (ஒவ்வாமை எதிர்ப்பு)',
@@ -679,7 +679,7 @@ const MEDICAL_FIELD_TRANSLATIONS = {
   'prescription required (rx)': {
     ta: 'மருத்துவச் சீட்டு அவசியம் (Rx)',
     hi: 'डॉक्टर के पर्चे की दवा (Rx)',
-    te: 'ప్రిస్క్రిప్షన్ అవసరం (Rx)',
+    te: 'ప్రిస్క్రిప్ஷன் అవసరం (Rx)',
     ml: 'ഡോക്ടറുടെ കുറിപ്പടി വേണം (Rx)',
     kn: 'ವೈದ್ಯರ ಪ್ರಿಸ್ಕ್ರಿಪ್ಷನ್ ಅಗತ್ಯ (Rx)'
   },
@@ -778,7 +778,7 @@ const MEDICAL_FIELD_TRANSLATIONS = {
     hi: 'एनआईएच मेडलाइनप्लस दवा जानकारी',
     te: 'ఎన్.ఐ.హెచ్ మెడ్‌లైన్ ప్లస్ ఔషధ సమాచారం',
     ml: 'എൻ.ഐ.എച്ച് മെഡ്‌ലൈൻ പ്ലസ് മരുന്ന് വിവരം',
-    kn: 'ಎನ್‌ಐಎಚ್ ಮೆಡ್‌ಲೈನ್ ಪ್ಲಸ್ ಔಷಧ ಮಾಹಿತಿ'
+    kn: 'ಎನ್‌ഐಎಚ್ ಮೆಡ್‌ಲೈನ್ ಪ್ಲಸ್ ಔಷಧ ಮಾಹಿತಿ'
   },
   'u.s. fda drug prescribing guide & rxnav': {
     ta: 'அமெரிக்க எஃப்.டி.ஏ மருந்து வழிகாட்டி & RxNav',
@@ -806,10 +806,10 @@ const MEDICAL_FIELD_TRANSLATIONS = {
     hi: 'यू.एस. खाद्य एवं औषधि प्रशासन (OpenFDA)',
     te: 'యు.ఎస్. ఫుడ్ అండ్ డ్రగ్ అడ్మినిస్ట్రేషన్ (OpenFDA)',
     ml: 'യു.എസ്. ഫുഡ് ആൻഡ് ഡ്രഗ് അഡ്മിനിസ്ട്രേഷൻ (OpenFDA)',
-    kn: 'ಯು.ಎಸ್. ಫುಡ್ ಅಂಡ್ ಡ್ರಗ್ ಅಡ್ಮಿನಿಸ್ಟ್ರೇಷನ್ (OpenFDA)'
+    kn: 'ಯು.ಎಸ್. ಫುಡ್ ಅಂಡ್ డ్రగ్ అడ్మినిస్ట్రేషన్ (OpenFDA)'
   },
 
-  // Uses
+  // Uses (What It Is Used For)
   'mild to moderate pain relief (headaches, muscle aches, toothaches, backaches) and fever reduction.': {
     ta: 'லேசான முதல் மிதமான வலி (தலைவலி, தசை வலி, பல் வலி, முதுகு வலி) மற்றும் காய்ச்சலைக் குறைக்க உதவுகிறது.',
     hi: 'हल्के से मध्यम दर्द (सिरदर्द, मांसपेशियों का दर्द, दांत दर्द, पीठ दर्द) और बुखार को कम करने के लिए उपयोग किया जाता है।',
@@ -851,7 +851,7 @@ const MEDICAL_FIELD_TRANSLATIONS = {
     ta: 'வழக்கமான அளவு விவரம்: 12 வயது மற்றும் அதற்கு மேற்பட்ட பெரியவர்கள் மற்றும் குழந்தைகள் தினமும் ஒரு முறை 10mg மாத்திரையை எடுத்துக்கொள்கிறார்கள்.',
     hi: 'सामान्य खुराक जानकारी: 12 वर्ष और उससे अधिक उम्र के वयस्क और बच्चे आमतौर पर दिन में एक बार 10mg की गोली लेते हैं।',
     te: 'సాధారణ మోతాదు సమాచారం: 12 సంవత్సరాలు మరియు అంతకంటే ఎక్కువ వయస్సు ఉన్నవారు రోజుకు ఒకసారి 10mg టాబ్లెట్ తీసుకుంటారు.',
-    ml: 'സാധാരണ അളവ്: 12 വയസ്സും അതിൽ കൂടുതലുമുള്ളവർ ദിവസത്തിൽ ഒരിക്കൽ 10mg ഗുളിക കഴിക്കുന്നു.',
+    ml: 'സാധാരണ അളവ്: മുതിർന്നവർ ദിവസത്തിൽ ഒരിക്കൽ 10mg ഗുളിക കഴിക്കുന്നു.',
     kn: 'ಸಾಮಾನ್ಯ ಪ್ರಮಾಣ: 12 ವರ್ಷ ಮತ್ತು ಮೇಲ್ಪಟ್ಟವರು ದಿನಕ್ಕೆ ಒಮ್ಮೆ 10mg ಮಾತ್ರೆ ತೆಗೆದುಕೊಳ್ಳುತ್ತಾರೆ.'
   },
   'typical dosage information from referenced source: 250mg to 500mg every 8 hours, or 500mg to 875mg every 12 hours as prescribed by a licensed physician. complete the full prescribed course even if symptoms resolve early.': {
@@ -889,7 +889,7 @@ const MEDICAL_FIELD_TRANSLATIONS = {
     hi: 'इसे भोजन के साथ या बिना भोजन के लिया जा सकता है। भोजन के साथ लेने से पेट खराब होने की संभावना कम होती है।',
     te: 'ఆహారంతో లేదా ఆహారం లేకుండా తీసుకోవచ్చు. భోజనంతో తీసుకోవడం వల్ల కడుపు ఉబ్బరం తగ్గుతుంది.',
     ml: 'ഭക്ഷണത്തോടൊപ്പമോ അല്ലാതെയോ കഴിക്കാം. ഭക്ഷണത്തോടൊപ്പം കഴിക്കുന്നത് വയറുവേദന കുറയ്ക്കാൻ സഹായിക്കും.',
-    kn: 'ಆಹಾರದೊಂದಿಗೆ ಅಥವಾ ಆಹಾರವಿಲ್ಲದೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದು. ಊಟದೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳುವುದು ಹೊಟ್ಟೆಯ ತೊಂದರೆಯನ್ನು ಕಡಿಮೆ ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.'
+    kn: 'ಆಹಾರದೊಂದಿಗೆ அல்லது ಆಹಾರವಿಲ್ಲದೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದು. ಊಟದೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳುವುದು ಹೊಟ್ಟೆಯ ತೊಂದರೆಯನ್ನು ಕಡಿಮೆ ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.'
   },
   'must be taken with food, milk, or an antacid to protect the stomach lining.': {
     ta: 'வயிற்றுப் படலத்தைப் பாதுகாக்க நிச்சயம் உணவு, பால் அல்லது என்டாசிட் உடன் எடுத்துக்கொள்ள வேண்டும்.',
@@ -1158,7 +1158,51 @@ export function getLocalizedDynamicText(text, lang = 'en') {
     }
   }
 
-  // 3. Dynamic Template Translations (e.g., "Therapeutic indication for X...")
+  // 3. Dedicated Uses (What It Is Used For) Matchers
+  if (cleanKey.includes('pain') || cleanKey.includes('fever') || cleanKey.includes('headache') || cleanKey.includes('toothache') || cleanKey.includes('backache')) {
+    const templates = {
+      ta: 'லேசான முதல் மிதமான வலி (தலைவலி, தசை வலி, பல் வலி, முதுகு வலி) மற்றும் காய்ச்சலைக் குறைக்க உதவுகிறது.',
+      hi: 'हल्के से मध्यम दर्द (सिरदर्द, मांसपेशियों का दर्द, दांत दर्द, पीठ दर्द) और बुखार को कम करने के लिए उपयोग किया जाता है।',
+      te: 'తేలికపాటి నుండి మితమైన నొప్పి (తలనొప్పి, కండరాల నొప్పులు, పంటి నొప్పి, వెన్నునొప్పి) మరియు జ్వరాన్ని తగ్గించడానికి ఉపయోగిస్తారు.',
+      ml: 'തലവേദന, പേശി വേദന, പല്ലുവേദന, മുതുകുവേദന തുടങ്ങിയ നേരിയ വേദനകൾ കുറയ്ക്കാനും പനി കുറയ്ക്കാനും ഉപയോഗിക്കുന്നു.',
+      kn: 'ಸಾಧಾರಣ ನೋವು (ತಲೆನೋವು, ಸ್ನಾಯು ನೋವು, ಹಲ್ಲಿನ ನೋವು, ಬೆನ್ನು ನೋವು) ಮತ್ತು ಜ್ವರವನ್ನು ಕಡಿಮೆ ಮಾಡಲು ಬಳಸಲಾಗುತ್ತದೆ.'
+    };
+    if (templates[lang]) return templates[lang];
+  }
+
+  if (cleanKey.includes('allergy') || cleanKey.includes('sneezing') || cleanKey.includes('runny nose') || cleanKey.includes('rhinitis') || cleanKey.includes('hives')) {
+    const templates = {
+      ta: 'தும்பல், ஒழுகு மூக்கு, அரிப்பு, கண்கள் கலங்குதல் மற்றும் ஒவ்வாமை அறிகுறிகளிலிருந்து நிவாரணம் அளிக்கிறது.',
+      hi: 'छींकने, बहती नाक, खुजली, आंखों में पानी और एलर्जी के लक्षणों से राहत दिलाता है।',
+      te: 'తుమ్ములు, కారే ముక్కు, దురద మరియు అలెర్జీ లక్షణాల నుండి ఉపశమనం కలిగిస్తుంది.',
+      ml: 'തുമ്മൽ, മൂക്കൊലിപ്പ്, ചൊറിച്ചിൽ തുടങ്ങിയ അലർജി ലക്ഷണങ്ങളിൽ നിന്ന് ആശ്വാസം നൽകുന്നു.',
+      kn: 'ಸೀನು, ಮೂಗು ಸೋರುವುದು, ತುರಿಕೆ மற்றும் ಅಲರ್ಜಿ ರೋಗಲಕ್ಷಣಗಳಿಂದ ಉಪಶಮನ ನೀಡುತ್ತದೆ.'
+    };
+    if (templates[lang]) return templates[lang];
+  }
+
+  if (cleanKey.includes('bacterial') || cleanKey.includes('respiratory') || cleanKey.includes('urinary') || cleanKey.includes('antibiotic')) {
+    const templates = {
+      ta: 'பாக்டீரியா தொற்றுகளுக்கான சிகிச்சை (சுவாசப் பாதை, காது/மூக்கு/தொண்டை, சிறுநீர் பாதை மற்றும் தோல் தொற்றுகள்). வைரஸ் தொற்றுகளுக்கு பலனளிக்காது.',
+      hi: 'बैक्टीरियल संक्रमण का इलाज (श्वसन तंत्र, कान/नाक/गला, मूत्र मार्ग और त्वचा संक्रमण)। वायरल संक्रमण पर प्रभावी नहीं।',
+      te: 'బ్యాక్టీరియా ఇన్ఫెక్షన్ల చికిత్స (శ్వాసకోశ, చెవి/ముక్కు/గొంతు, మూత్రనాళ ఇన్ఫెక్షన్లు). వైరల్ ఇన్ఫెక్షన్లపై పనిచేయదు.',
+      ml: 'ബാക്ടീരിയ മൂലമുണ്ടാകുന്ന രോഗബാധകൾക്കുള്ള ചികിത്സ. വൈറൽ രോഗങ്ങളിൽ ഫലപ്രദമല്ല.',
+      kn: 'ಬ್ಯಾಕ್ಟೀರಿಯಾದ ಸೋಂಕುಗಳ ಚಿಕಿತ್ಸೆ (ಉಸಿರಾಟದ ನಾಳ, ಕಿವಿ/ಮೂಗು/ಗಂಟಲು, ಚರ್ಮದ ಸೋಂಕುಗಳು).'
+    };
+    if (templates[lang]) return templates[lang];
+  }
+
+  if (cleanKey.includes('inflammation') || cleanKey.includes('swelling') || cleanKey.includes('arthritis') || cleanKey.includes('cramps')) {
+    const templates = {
+      ta: 'வலி, வீக்கம் மற்றும் காய்ச்சல் நிவாரணம் (கீல்வாதம், மாதவிடாய் வலி, பல் வலி, தசை வலி).',
+      hi: 'दर्द, सूजन और बुखार से राहत (गठिया, मासिक धर्म दर्द, दांत दर्द, मांसपेशियों का दर्द)।',
+      te: 'నొప్పి, వాపు మరియు జ్వరం నుండి ఉపశమనం (కీళ్ల నొప్పులు, పంటి నొప్పి, కండరాల నొప్పులు).',
+      ml: 'വേദന, വീക്കം, പനി എന്നിവ കുറയ്ക്കാൻ സഹായിക്കുന്നു (പേശി വേദന, പല്ലുവേദന).',
+      kn: 'ನೋವು, ಉರಿಯೂತ ಮತ್ತು ಜ್ವರ ಉಪಶಮನ (ಕೀಲು ನೋವು, ಹಲ್ಲಿನ ನೋವು, ಸ್ನಾಯು ನೋವು).'
+    };
+    if (templates[lang]) return templates[lang];
+  }
+
   if (cleanKey.includes('therapeutic indication for')) {
     const medName = rawText.replace(/Therapeutic indication for /i, '').replace(/\..*/, '').trim();
     const templates = {
@@ -1171,6 +1215,18 @@ export function getLocalizedDynamicText(text, lang = 'en') {
     if (templates[lang]) return templates[lang];
   }
 
+  if (cleanKey.includes('indication') || cleanKey.includes('indicated') || cleanKey.includes('used for') || cleanKey.includes('treatment of') || cleanKey.includes('relief of')) {
+    const templates = {
+      ta: 'தகுதியான மருத்துவ நிபுணரின் வழிகாட்டுதலின்படி நோயைக் குணப்படுத்தவும் நிவாரணம் அளிக்கவும் பயன்படுகிறது.',
+      hi: 'योग्य चिकित्सा पेशेवर के निर्देशानुसार बीमारी के इलाज और राहत के लिए उपयोग किया जाता है।',
+      te: 'అర్హత కలిగిన వైద్య నిపుణుడి సూచనల ప్రకారం వ్యాధి చికిత్స మరియు ఉపశమనం కోసం ఉపయోగిస్తారు.',
+      ml: 'ഡോക്ടറുടെ നിർദ്ദേശപ്രകാരം രോഗ ചികിത്സയ്ക്കും ആശ്വാസത്തിനുമായി ഉപയോഗിക്കുന്നു.',
+      kn: 'ಅರ್ಹ ವೈದ್ಯಕೀಯ ತಜ್ಞರ ಮಾರ್ಗದರ್ಶನದಂತೆ ಚಿಕಿತ್ಸೆ ಮತ್ತು ಉಪಶಮನಕ್ಕೆ ಬಳಸಲಾಗುತ್ತದೆ.'
+    };
+    if (templates[lang]) return templates[lang];
+  }
+
+  // 4. General Medical Fallback Templates
   if (cleanKey.includes('typical dosage information from referenced source')) {
     const templates = {
       ta: 'குறிப்பிடப்பட்ட ஆதாரத்திலிருந்து வழக்கமான அளவு விவரம்: உங்கள் மருத்துவர் அல்லது மருந்தாளுனர் வழங்கிய துல்லியமான மருந்துச் சீட்டு வழிமுறைகளைப் பின்பற்றவும்.',
@@ -1226,7 +1282,7 @@ export function getLocalizedDynamicText(text, lang = 'en') {
     if (templates[lang]) return templates[lang];
   }
 
-  // 4. Tokenize by sentences for long compound paragraphs
+  // 5. Tokenize by sentences for long compound paragraphs
   const sentences = rawText.split(/(?<=[.!?])\s+/);
   if (sentences.length > 1) {
     const translatedSentences = sentences.map(s => getLocalizedDynamicText(s, lang));
