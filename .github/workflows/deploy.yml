@@ -43,6 +43,7 @@ jobs:
           npm run build
         env:
           VITE_BASE_PATH: '/Mediscan-AI/'
+          VITE_API_URL:'https://mediscan-ai-ilha.onrender.com'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
