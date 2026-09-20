@@ -12,7 +12,7 @@ frontend/dist/
 frontend/dist-ssr/
 
 # SQLite Database binaries & uploads
-database/*.db
+
 database/*.db-journal
 backend/uploads/*
 !backend/uploads/.gitkeep
